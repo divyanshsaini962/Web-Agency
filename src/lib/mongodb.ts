@@ -4,7 +4,6 @@ declare global {
   // Using Node's globalThis to store the Mongo client promise during development
   // so hot-reloads don't create multiple connections.
   // This is undefined in production builds.
-  // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 

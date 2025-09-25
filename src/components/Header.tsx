@@ -2,6 +2,7 @@
 "use client";
 import { useState } from "react";
 import { Shield } from "lucide-react"; // For Admin icon
+import Link from "next/link";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -20,24 +21,24 @@ export default function Header() {
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex gap-6 text-white/70 font-medium">
-        <a href="/" className="hover:text-white transition">Home</a>
-        <a href="/services" className="hover:text-white transition">Services</a>
-        <a href="/portfolio" className="hover:text-white transition">Portfolio</a>
-        <a href="/blog" className="hover:text-white transition">Blog</a>
-        <a href="/about" className="hover:text-white transition">About</a>
-        <a href="/contact" className="hover:text-white transition">Contact</a>
+        <Link href="/" className="hover:text-white transition">Home</Link>
+        <Link href="/services" className="hover:text-white transition">Services</Link>
+        <Link href="/portfolio" className="hover:text-white transition">Portfolio</Link>
+        <Link href="/blog" className="hover:text-white transition">Blog</Link>
+        <Link href="/about" className="hover:text-white transition">About</Link>
+        <Link href="/contact" className="hover:text-white transition">Contact</Link>
       </nav>
 
       {/* Right Side */}
       <div className="flex items-center gap-4">
         {/* Admin Icon */}
-        <a
+        <Link
           href="/admin"
           className="hidden md:flex w-9 h-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition"
           title="Admin Panel"
         >
           <Shield size={18} />
-        </a>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button
@@ -54,15 +55,15 @@ export default function Header() {
           className="absolute top-full left-0 mt-2 w-full flex flex-col items-center gap-4 p-4 
                      bg-white/10 backdrop-blur-md border border-white/20 rounded-xl md:hidden"
         >
-          <a href="/" className="text-white hover:text-cyan-300">Home</a>
-          <a href="/services" className="text-white hover:text-cyan-300">Services</a>
-          <a href="/portfolio" className="text-white hover:text-cyan-300">Portfolio</a>
-          <a href="/blog" className="text-white hover:text-cyan-300">Blog</a>
-          <a href="/about" className="text-white hover:text-cyan-300">About</a>
-          <a href="/contact" className="text-white hover:text-cyan-300">Contact</a>
-          <a href="/admin" className="flex items-center gap-2 text-white hover:text-cyan-300">
+          <Link href="/" className="text-white hover:text-cyan-300">Home</Link>
+          <Link href="/services" className="text-white hover:text-cyan-300">Services</Link>
+          <Link href="/portfolio" className="text-white hover:text-cyan-300">Portfolio</Link>
+          <Link href="/blog" className="text-white hover:text-cyan-300">Blog</Link>
+          <Link href="/about" className="text-white hover:text-cyan-300">About</Link>
+          <Link href="/contact" className="text-white hover:text-cyan-300">Contact</Link>
+          <Link href="/admin" className="flex items-center gap-2 text-white hover:text-cyan-300">
             <Shield size={16} /> Admin
-          </a>
+          </Link>
         </div>
       )}
     </header>

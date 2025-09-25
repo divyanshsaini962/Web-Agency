@@ -1,6 +1,7 @@
 "use client";
 
 import { Facebook, Twitter, Linkedin, Github, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -27,36 +28,16 @@ export default function Footer() {
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a
-                href="/services"
-                className="hover:text-white transition duration-300"
-              >
-                Services
-              </a>
+              <Link href="/services" className="hover:text-white transition duration-300">Services</Link>
             </li>
             <li>
-              <a
-                href="/portfolio"
-                className="hover:text-white transition duration-300"
-              >
-                Portfolio
-              </a>
+              <Link href="/portfolio" className="hover:text-white transition duration-300">Portfolio</Link>
             </li>
             <li>
-              <a
-                href="/about"
-                className="hover:text-white transition duration-300"
-              >
-                About Us
-              </a>
+              <Link href="/about" className="hover:text-white transition duration-300">About Us</Link>
             </li>
             <li>
-              <a
-                href="/contact"
-                className="hover:text-white transition duration-300"
-              >
-                Contact
-              </a>
+              <Link href="/contact" className="hover:text-white transition duration-300">Contact</Link>
             </li>
           </ul>
         </div>
