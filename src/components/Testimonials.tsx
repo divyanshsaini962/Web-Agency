@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Testimonials() {
   const testimonials = [
@@ -83,11 +84,15 @@ export default function Testimonials() {
                 style={{ flex: "0 0 100%" }} // 1 card per slide
               >
                 <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-2xl shadow-xl flex flex-col items-center">
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    className="w-20 h-20 rounded-full border-4 border-white/20 mb-4 object-cover"
-                  />
+                  <div className="w-20 h-20 rounded-full border-4 border-white/20 mb-4 overflow-hidden relative">
+                    <Image
+                      src={t.image}
+                      alt={t.name}
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                    />
+                  </div>
                   <p className="text-gray-300 italic mb-4">“{t.feedback}”</p>
                   <h3 className="text-lg font-semibold text-white">{t.name}</h3>
                   <p className="text-sm text-gray-400">{t.role}</p>

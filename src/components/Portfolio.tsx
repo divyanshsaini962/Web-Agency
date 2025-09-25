@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Portfolio() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -86,11 +87,16 @@ export default function Portfolio() {
       className="min-w-[90%] sm:min-w-[45%] md:min-w-[30%] relative group rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 backdrop-blur-lg hover:scale-105 transform transition duration-500"
     >
       {/* Project Image */}
-      <img
-        src={project.image}
-        alt={project.title}
-        className="w-full h-64 object-cover group-hover:opacity-70 transition duration-500"
-      />
+      <div className="w-full h-64 relative">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover group-hover:opacity-70 transition duration-500"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 30vw"
+          priority={index < 3}
+        />
+      </div>
 
       {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
