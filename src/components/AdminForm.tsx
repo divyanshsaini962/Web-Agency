@@ -39,8 +39,8 @@ function BlogForm() {
       setCategory("");
       setImage("");
       setIsPublished(false);
-    } catch (err: any) {
-      setMessage(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      setMessage(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -166,8 +166,8 @@ function PortfolioForm() {
       setLiveUrl("");
       setGithubUrl("");
       setIsFeatured(false);
-    } catch (err: any) {
-      setMessage(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      setMessage(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }

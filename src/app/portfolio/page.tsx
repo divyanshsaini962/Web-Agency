@@ -33,9 +33,9 @@ export default async function PortfolioPage() {
       {/* Projects */}
       {projects.length > 0 ? (
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
-          {projects.map((project: any) => (
+          {projects.map((project: { _id: string; title: string; description: string; image?: string; liveUrl?: string; githubUrl?: string }) => (
             <div
-              key={project._id || project.id}
+              key={project._id}
               className="group relative bg-gray-900/80 border border-gray-800 \
                         rounded-2xl overflow-hidden shadow-lg \
                         hover:shadow-cyan-500/40 hover:border-cyan-400/50 \

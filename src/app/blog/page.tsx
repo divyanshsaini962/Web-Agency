@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 
 async function fetchBlogs() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/blogs?published=true`, {
     next: { revalidate: 60 },
   });
-  if (!res.ok) return [] as any[];
+  if (!res.ok) return [];
   return res.json();
 }
 
@@ -21,15 +22,17 @@ export default async function BlogPage() {
         {blogs.length === 0 && (
           <p className="col-span-full text-center text-gray-400">No posts yet.</p>
         )}
-        {blogs.map((blog: any) => (
+        {blogs.map((blog: { _id: string; title: string; image?: string; createdAt: string; author?: string; slug: string }) => (
           <div
             key={blog._id}
             className="rounded-2xl border border-white/20 bg-white/5 backdrop-blur-lg shadow-lg overflow-hidden group hover:shadow-cyan-500/30 transition"
           >
             <div className="relative w-full h-52 overflow-hidden">
-              <img
+              <Image
                 src={blog.image || "/vercel.svg"}
                 alt={blog.title}
+                width={400}
+                height={208}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </div>

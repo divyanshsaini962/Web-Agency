@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     const url = new URL(req.url);
     const publishedParam = url.searchParams.get("published");
     const limitParam = url.searchParams.get("limit");
-    const filter: Record<string, any> = {};
+    const filter: Record<string, boolean> = {};
     if (publishedParam === "true") filter.isPublished = true;
     if (publishedParam === "false") filter.isPublished = false;
 
@@ -25,7 +25,7 @@ export async function GET(req: Request) {
     const limit = limitParam ? Number(limitParam) : undefined;
     const blogs = await (limit ? cursor.limit(limit) : cursor).toArray();
     return NextResponse.json(blogs);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch blogs" }, { status: 500 });
   }
 }
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
 
     const result = await db.collection("blogs").insertOne(blogDoc);
     return NextResponse.json({ _id: result.insertedId, ...blogDoc }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to create blog" }, { status: 500 });
   }
 }

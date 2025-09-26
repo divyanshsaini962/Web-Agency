@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Users, Rocket, Heart, Award } from "lucide-react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function AboutPage() {
   // Floating background circles
@@ -169,9 +170,11 @@ export default function AboutPage() {
               <div className="relative w-full h-80 transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
                 {/* Front */}
                 <div className="absolute inset-0 rounded-xl overflow-hidden border border-white/20 bg-white/5 backdrop-blur-lg shadow-lg">
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
+                    width={300}
+                    height={240}
                     className="w-full h-60 object-cover"
                   />
                   <div className="p-5">

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function CallToAction() {
   return (
     <section className="relative z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 py-24 px-6">
@@ -15,18 +17,18 @@ export default function CallToAction() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-6">
-          <a
+          <Link
             href="/contact"
             className="px-8 py-4 rounded-xl bg-blue-500 text-white font-semibold hover:bg-blue-600 transition shadow-lg hover:shadow-blue-500/40"
           >
             Get a Free Consultation
-          </a>
-          <a
+          </Link>
+          <Link
             href="/portfolio"
             className="px-8 py-4 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/10 transition"
           >
             View Our Work
-          </a>
+          </Link>
         </div>
       </div>
 

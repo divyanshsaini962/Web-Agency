@@ -6,7 +6,6 @@ import {
   Layers,
   Globe,
   Palette,
-  Database,
   Shield,
   Cpu,
   BarChart,

@@ -32,7 +32,7 @@ export default function ContactPage() {
       } else {
         setStatus("❌ Failed to send. Try again later.");
       }
-    } catch (err) {
+    } catch {
       setStatus("⚠️ Error occurred. Please try again.");
     }
   };

@@ -11,7 +11,7 @@ const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       // Allow only specific emails for admin access (configured via environment variables)
       const allowedEmails = process.env.ALLOWED_ADMIN_EMAILS?.split(',').map(email => email.trim()) || [];
       

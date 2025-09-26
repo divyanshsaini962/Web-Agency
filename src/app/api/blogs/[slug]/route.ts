@@ -12,7 +12,7 @@ export async function GET(
     const blog = await db.collection("blogs").findOne({ slug });
     if (!blog) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(blog);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch blog" }, { status: 500 });
   }
 }
@@ -39,7 +39,7 @@ export async function PUT(
     if (!result || !result.value)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(result.value);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to update blog" }, { status: 500 });
   }
 }
@@ -56,7 +56,7 @@ export async function DELETE(
     if (result.deletedCount === 0)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ ok: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to delete blog" }, { status: 500 });
   }
 }

@@ -15,7 +15,7 @@ export async function GET(
       .findOne({ _id: new ObjectId(id) });
     if (!project) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(project);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch project" }, { status: 500 });
   }
 }
@@ -41,7 +41,7 @@ export async function PUT(
     if (!result || !result.value)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(result.value);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to update project" }, { status: 500 });
   }
 }
@@ -60,7 +60,7 @@ export async function DELETE(
     if (result.deletedCount === 0)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ ok: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to delete project" }, { status: 500 });
   }
 }

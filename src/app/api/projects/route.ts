@@ -6,7 +6,7 @@ export async function GET(req: Request) {
     const url = new URL(req.url);
     const featuredParam = url.searchParams.get("featured");
     const limitParam = url.searchParams.get("limit");
-    const filter: Record<string, any> = {};
+    const filter: Record<string, boolean> = {};
     if (featuredParam === "true") filter.isFeatured = true;
     if (featuredParam === "false") filter.isFeatured = false;
 
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     const limit = limitParam ? Number(limitParam) : undefined;
     const projects = await (limit ? cursor.limit(limit) : cursor).toArray();
     return NextResponse.json(projects);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 });
   }
 }
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       category: body.category?.toString() ?? "",
       image: body.image?.toString() ?? "",
       technologies: Array.isArray(body.technologies)
-        ? body.technologies.map((t: any) => t.toString())
+        ? body.technologies.map((t: string) => t.toString())
         : (body.technologies?.toString()?.split(",") ?? []).map((t: string) => t.trim()).filter(Boolean),
       liveUrl: body.liveUrl?.toString() ?? "",
       githubUrl: body.githubUrl?.toString() ?? "",
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     const db = client.db("agencyDB");
     const result = await db.collection("projects").insertOne(projectDoc);
     return NextResponse.json({ _id: result.insertedId, ...projectDoc }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to create project" }, { status: 500 });
   }
 }
