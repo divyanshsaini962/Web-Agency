@@ -2,11 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 async function fetchBlogs() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/blogs?published=true`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/blogs?published=true`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    return [];
+  }
 }
 
 export default async function BlogPage() {

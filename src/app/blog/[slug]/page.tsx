@@ -2,10 +2,15 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 async function fetchBlog(slug: string) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "";
-  const res = await fetch(`${base}/api/blogs/${slug}`, { next: { revalidate: 60 } });
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const base = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000';
+    const res = await fetch(`${base}/api/blogs/${slug}`, { next: { revalidate: 60 } });
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching blog:', error);
+    return null;
+  }
 }
 
 export default async function BlogDetailPage(context: { params: Promise<{ slug: string }> }) {
