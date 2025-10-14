@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 export default function Banner() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
@@ -36,12 +37,16 @@ export default function Banner() {
 
         {/* Buttons */}
         <div className="mt-10 flex flex-wrap justify-center gap-6">
-          <button className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold shadow-lg hover:shadow-cyan-400/50 transform hover:scale-105 transition">
+          <Link href="/contact">
+          <button  className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold shadow-lg hover:shadow-cyan-400/50 transform hover:scale-105 transition">
             Start a Project
           </button>
+          </Link>
+          <Link href="/portfolio">
           <button className="px-8 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold hover:bg-white/20 hover:shadow-lg transform hover:scale-105 transition">
             View Portfolio
           </button>
+          </Link>
         </div>
       </div>
     </section>

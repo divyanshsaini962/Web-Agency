@@ -17,14 +17,14 @@ export default function Testimonials() {
       role: "Founder, BrightEcom (UK)",
       feedback:
         "Our e-commerce store was redesigned beautifully. The modern look has increased customer trust and sales.",
-      image: "/clients/emily.jpg",
+      image: "/clients/emily.webp",
     },
     {
       name: "Lucas Müller",
       role: "CTO, AppVision (Germany)",
       feedback:
         "A highly professional agency. They delivered a mobile app with flawless API integration on time and on budget.",
-      image: "/clients/lucas.jpg",
+      image: "/clients/Lucas.avif",
     },
     {
       name: "Sophia Anderson",
@@ -38,14 +38,14 @@ export default function Testimonials() {
       role: "Co-Founder, FintechPro (UK)",
       feedback:
         "Superb full-stack development service. They built us a secure and scalable fintech solution that works flawlessly.",
-      image: "/clients/james.jpg",
+      image: "/clients/james.webp",
     },
     {
       name: "Clara Rossi",
       role: "Product Manager, WebCore (Italy)",
       feedback:
         "Great collaboration! Their team was quick, efficient, and delivered exactly what we envisioned for our SaaS product.",
-      image: "/clients/clara.jpg",
+      image: "/clients/clara.webp",
     },
   ];
 

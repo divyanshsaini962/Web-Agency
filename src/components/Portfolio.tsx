@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+
 export default function Portfolio() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -11,34 +12,34 @@ export default function Portfolio() {
     {
       title: "E-Commerce Website",
       description: "A modern store with cart & payment gateway.",
-      image: "/projects/ecommerce.jpg",
+      image: "/Eccommerce.png",
     },
     {
       title: "SaaS Dashboard",
       description: "Analytics dashboard with charts & authentication.",
-      image: "/projects/saas.jpg",
+      image: "/saas.png",
     },
     {
       title: "Mobile App",
       description: "Cross-platform mobile app with sleek UI.",
-      image: "/projects/app.jpg",
+      image: "/Apps.png",
     },
     {
       title: "Corporate Website",
       description: "Responsive site built with Next.js & Tailwind CSS.",
-      image: "/projects/corporate.jpg",
+      image: "/Corporate.png",
     },
     {
       title: "AI Chatbot Integration",
       description:
         "Smart assistant powered by machine learning for customer support.",
-      image: "/projects/ai-chatbot.jpg",
+      image: "/Chatbot.png",
     },
     {
       title: "Full-Stack Web Platform",
       description:
         "End-to-end solution with secure APIs and cloud deployment.",
-      image: "/projects/fullstack.jpg",
+      image: "/Fullstack.png",
     },
   ];
 

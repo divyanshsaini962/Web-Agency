@@ -99,47 +99,46 @@ export default function AboutPage() {
       </div>
 
       {/* Timeline / Journey */}
-<div className="relative max-w-5xl mx-auto mb-32">
-  <h2 className="text-4xl font-bold text-white text-center mb-16">
-    Our Journey
-  </h2>
+      <div className="relative max-w-5xl mx-auto mb-32">
+        <h2 className="text-4xl font-bold text-white text-center mb-16">
+          Our Journey
+        </h2>
 
-  <div className="relative border-l-4 border-purple-500/50 ml-6">
-    {[
-      { year: "2018", text: "Founded with a vision to innovate." },
-      { year: "2020", text: "Expanded to global clients." },
-      { year: "2023", text: "Awarded as top digital agency." },
-    ].map((step, idx) => (
-      <motion.div
-        key={idx}
-        className={`mb-12 ml-6 flex items-start gap-6 ${
-          idx % 2 === 0 ? "flex-row" : "flex-row-reverse mr-6"
-        }`}
-        initial={{ opacity: 0, x: idx % 2 === 0 ? -80 : 80 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: idx * 0.2 }}
-        viewport={{ once: true }}
-      >
-        {/* Circle with year */}
-        <div className="relative flex-shrink-0">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex items-center justify-center text-white font-bold shadow-lg">
-            {step.year}
-          </div>
-          <span className="absolute w-4 h-4 rounded-full bg-cyan-400 -left-10 top-1/2 transform -translate-y-1/2 animate-pulse"></span>
-        </div>
+        <div className="relative border-l-4 border-purple-500/50 ml-6">
+          {[
+            { year: "2018", text: "Founded with a vision to innovate." },
+            { year: "2020", text: "Expanded to global clients." },
+            { year: "2023", text: "Awarded as top digital agency." },
+          ].map((step, idx) => (
+            <motion.div
+              key={idx}
+              className={`mb-12 ml-6 flex items-start gap-6 ${idx % 2 === 0 ? "flex-row" : "flex-row-reverse mr-6"
+                }`}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -80 : 80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: idx * 0.2 }}
+              viewport={{ once: true }}
+            >
+              {/* Circle with year */}
+              <div className="relative flex-shrink-0">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex items-center justify-center text-white font-bold shadow-lg">
+                  {step.year}
+                </div>
+                <span className="absolute w-4 h-4 rounded-full bg-cyan-400 -left-10 top-1/2 transform -translate-y-1/2 animate-pulse"></span>
+              </div>
 
-        {/* Text box */}
-        <div className="rounded-xl bg-white/5 backdrop-blur-lg border border-white/10 p-6 max-w-md shadow-md">
-          <p className="text-gray-300 text-lg">{step.text}</p>
+              {/* Text box */}
+              <div className="rounded-xl bg-white/5 backdrop-blur-lg border border-white/10 p-6 max-w-md shadow-md">
+                <p className="text-gray-300 text-lg">{step.text}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</div>
+      </div>
 
 
       {/* Team with Flip Animation */}
-      <div className="max-w-6xl mx-auto text-center z-10">
+      {/* <div className="max-w-6xl mx-auto text-center z-10">
         <h2 className="text-4xl font-bold text-white mb-10">Meet Our Team</h2>
         <div className="grid md:grid-cols-3 gap-10">
           {[
@@ -168,9 +167,9 @@ export default function AboutPage() {
               viewport={{ once: true }}
             >
               <div className="relative w-full h-80 transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
-                {/* Front */}
+             
                 <div className="absolute inset-0 rounded-xl overflow-hidden border border-white/20 bg-white/5 backdrop-blur-lg shadow-lg">
-                  <Image
+                  <img
                     src={member.image}
                     alt={member.name}
                     width={300}
@@ -182,7 +181,7 @@ export default function AboutPage() {
                     <p className="text-gray-400 text-sm">{member.role}</p>
                   </div>
                 </div>
-                {/* Back */}
+                
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 text-white p-6 rotate-y-180 backface-hidden flex items-center justify-center">
                   <p className="text-lg font-medium">
                     {member.name} is passionate about creating amazing digital solutions
@@ -193,7 +192,7 @@ export default function AboutPage() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

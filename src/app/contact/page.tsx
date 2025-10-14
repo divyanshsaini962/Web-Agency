@@ -8,32 +8,82 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
   const [appointment, setAppointment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (form.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
+    }
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!form.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (form.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+
+    if (!appointment) {
+      newErrors.appointment = "Appointment date is required";
+    } else if (new Date(appointment) < new Date()) {
+      newErrors.appointment = "Please select a future date";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("Sending...");
+    
+    if (!validateForm()) {
+      setStatus("Please fix the errors below");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus("Sending message...");
 
     try {
-      // Example API call
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, appointment }),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        setStatus("✅ Message sent successfully!");
+        setStatus("✅ Message sent successfully! We'll get back to you within 24 hours.");
         setForm({ name: "", email: "", message: "" });
         setAppointment("");
+        setErrors({});
       } else {
-        setStatus("❌ Failed to send. Try again later.");
+        setStatus(`❌ ${data.error || "Failed to send message. Please try again."}`);
       }
-    } catch {
-      setStatus("⚠️ Error occurred. Please try again.");
+    } catch (error) {
+      setStatus("⚠️ Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -56,15 +106,15 @@ export default function ContactPage() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <MapPin className="text-cyan-400" />
-              <span>123 Web Street, Tech City, USA</span>
+              <span>325 Web Street, Texas City, USA</span>
             </div>
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <Phone className="text-cyan-400" />
               <span>+1 (555) 123-4567</span>
-            </div>
+            </div> */}
             <div className="flex items-center gap-3">
               <Mail className="text-cyan-400" />
-              <span>contact@velosphere.com</span>
+              <span>divyanshxtudio@gmail.com</span>
             </div>
           </div>
 
@@ -113,58 +163,107 @@ export default function ContactPage() {
           <h2 className="text-2xl font-semibold mb-6">Send us a message</h2>
 
           <div className="space-y-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 focus:border-cyan-400 focus:ring focus:ring-cyan-400/30 outline-none text-white"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 focus:border-cyan-400 focus:ring focus:ring-cyan-400/30 outline-none text-white"
-            />
-            
-            {/* Appointment Date Picker */}
-            <div className="flex items-center gap-3 bg-white/5 border border-white/20 rounded-lg px-4 py-3">
-              <Calendar className="text-cyan-400" />
+            <div>
               <input
-                type="date"
-                name="appointment"
-                value={appointment}
-                onChange={(e) => setAppointment(e.target.value)}
-                className="bg-transparent outline-none w-full text-white"
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={form.name}
+                onChange={handleChange}
                 required
+                className={`w-full px-4 py-3 rounded-lg bg-white/5 border focus:ring focus:ring-cyan-400/30 outline-none text-white ${
+                  errors.name ? 'border-red-400 focus:border-red-400' : 'border-white/20 focus:border-cyan-400'
+                }`}
               />
+              {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
             </div>
 
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={form.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 focus:border-cyan-400 focus:ring focus:ring-cyan-400/30 outline-none text-white resize-none"
-            />
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className={`w-full px-4 py-3 rounded-lg bg-white/5 border focus:ring focus:ring-cyan-400/30 outline-none text-white ${
+                  errors.email ? 'border-red-400 focus:border-red-400' : 'border-white/20 focus:border-cyan-400'
+                }`}
+              />
+              {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+            </div>
+            
+            {/* Appointment Date Picker */}
+            <div>
+              <div className={`flex items-center gap-3 bg-white/5 border rounded-lg px-4 py-3 ${
+                errors.appointment ? 'border-red-400' : 'border-white/20'
+              }`}>
+                <Calendar className="text-cyan-400" />
+                <input
+                  type="date"
+                  name="appointment"
+                  value={appointment}
+                  onChange={(e) => {
+                    setAppointment(e.target.value);
+                    if (errors.appointment) {
+                      setErrors({ ...errors, appointment: "" });
+                    }
+                  }}
+                  min={new Date().toISOString().split('T')[0]}
+                  className="bg-transparent outline-none w-full text-white"
+                  required
+                />
+              </div>
+              {errors.appointment && <p className="text-red-400 text-sm mt-1">{errors.appointment}</p>}
+            </div>
+
+            <div>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className={`w-full px-4 py-3 rounded-lg bg-white/5 border focus:ring focus:ring-cyan-400/30 outline-none text-white resize-none ${
+                  errors.message ? 'border-red-400 focus:border-red-400' : 'border-white/20 focus:border-cyan-400'
+                }`}
+              />
+              {errors.message && <p className="text-red-400 text-sm mt-1">{errors.message}</p>}
+            </div>
           </div>
 
           <button
             type="submit"
-            className="mt-6 w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-400 hover:opacity-90 transition font-semibold"
+            disabled={isSubmitting}
+            className={`mt-6 w-full flex items-center justify-center gap-2 py-3 rounded-lg font-semibold transition ${
+              isSubmitting 
+                ? 'bg-gray-500 cursor-not-allowed' 
+                : 'bg-gradient-to-r from-purple-500 to-cyan-400 hover:opacity-90'
+            }`}
           >
-            <Send size={18} /> Send Message
+            {isSubmitting ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                Sending...
+              </>
+            ) : (
+              <>
+                <Send size={18} /> Send Message
+              </>
+            )}
           </button>
 
           {status && (
-            <p className="mt-4 text-center text-sm text-gray-200">{status}</p>
+            <div className={`mt-4 p-3 rounded-lg text-center text-sm ${
+              status.includes('✅') 
+                ? 'bg-green-500/20 text-green-300 border border-green-500/30' 
+                : status.includes('❌') || status.includes('⚠️')
+                ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+            }`}>
+              {status}
+            </div>
           )}
         </motion.form>
       </div>
