@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       message: message.trim(),
       appointment: appointmentDate,
       status: 'new', // new, contacted, converted, closed
-      ip: request.ip || request.headers.get('x-forwarded-for') || 'unknown',
+  ip: request.headers.get('x-forwarded-for') || 'unknown',
       userAgent: request.headers.get('user-agent') || 'unknown',
       createdAt: new Date(),
       updatedAt: new Date(),
