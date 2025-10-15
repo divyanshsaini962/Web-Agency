@@ -17,7 +17,7 @@ export default function Portfolio() {
     {
       title: "SaaS Dashboard",
       description: "Analytics dashboard with charts & authentication.",
-      image: "/saas.png",
+      image: "/Saas.png",
     },
     {
       title: "Mobile App",
