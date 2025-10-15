@@ -71,3 +71,4 @@ If you prefer not to use Gmail, you can use:
 - **Outlook/Hotmail** (similar setup)
 
 Just update the transporter configuration in `src/app/api/contact/route.ts`
+
